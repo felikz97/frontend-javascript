@@ -1,6 +1,3 @@
-// main.ts
-
-// Define the Student interface
 interface Student {
   firstName: string;
   lastName: string;
@@ -8,52 +5,44 @@ interface Student {
   location: string;
 }
 
-// Create two students
 const student1: Student = {
   firstName: "Felix",
   lastName: "Kipkemoi",
-  age: 22,
-  location: "Kenya",
+  age: 20,
+  location: "Kenya"
 };
 
 const student2: Student = {
   firstName: "Dabitha",
-  lastName: "Smith",
+  lastName: "Johns",
   age: 22,
-  location: "Kericho",
+  location: "Kericho, Kenya"
 };
 
-// Array containing the students
 const studentsList: Student[] = [student1, student2];
 
-// Create table elements
 const table = document.createElement("table");
-const tableHeader = document.createElement("tr");
+table.style.borderCollapse = "collapse";
 
-const headerFirstName = document.createElement("th");
-headerFirstName.textContent = "First Name";
-const headerLocation = document.createElement("th");
-headerLocation.textContent = "Location";
-
-tableHeader.appendChild(headerFirstName);
-tableHeader.appendChild(headerLocation);
-table.appendChild(tableHeader);
-
-// Append a row for each student
-studentsList.forEach((student) => {
-  const row = document.createElement("tr");
-
-  const cellFirstName = document.createElement("td");
-  cellFirstName.textContent = student.firstName;
-
-  const cellLocation = document.createElement("td");
-  cellLocation.textContent = student.location;
-
-  row.appendChild(cellFirstName);
-  row.appendChild(cellLocation);
-
-  table.appendChild(row);
+const header = table.insertRow();
+["First Name", "Location"].forEach(text => {
+  const th = document.createElement("th");
+  th.textContent = text;
+  th.style.border = "1px solid black";
+  th.style.padding = "8px";
+  header.appendChild(th);
 });
 
-// Add table to the DOM
+studentsList.forEach(student => {
+  const row = table.insertRow();
+  const cell1 = row.insertCell();
+  const cell2 = row.insertCell();
+  cell1.textContent = student.firstName;
+  cell2.textContent = student.location;
+  [cell1, cell2].forEach(cell => {
+    cell.style.border = "1px solid black";
+    cell.style.padding = "8px";
+  });
+});
+
 document.body.appendChild(table);
